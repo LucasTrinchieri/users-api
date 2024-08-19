@@ -7,7 +7,7 @@ namespace Users_api.Service
     public class UserService : ICRUD<UserDTO, UserInsertDTO, UserUpdateDTO>
     {
          private IRepository<User> _repository;
-        public UserService([FromKeyedServices("UserRepository")] IRepository<User> repository) 
+        public UserService([FromKeyedServices("UserRepository")] IRepository<User> repository)
         { 
             _repository = repository;
         }
@@ -81,11 +81,8 @@ namespace Users_api.Service
                 return null;
             }
 
-            userToUpdate = new User
-            {
-                Name = updateDTO.Name,
-                Email = updateDTO.Email
-            };
+            userToUpdate.Name = updateDTO.Name;
+            userToUpdate.Email = updateDTO.Email;
 
             _repository.Update(userToUpdate);
             await _repository.Save();
