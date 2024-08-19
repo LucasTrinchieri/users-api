@@ -48,7 +48,7 @@ namespace Users_api.Service
 
             foreach (var user in users)
             {
-                if (user.Name == newUser.Name)
+                if (user.Email == newUser.Email)
                 {
                     throw new InvalidOperationException("Un usuario con el mismo email ya existe");
                 }
