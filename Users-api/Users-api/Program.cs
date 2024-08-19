@@ -1,8 +1,10 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Users_api.Dto;
 using Users_api.Models;
 using Users_api.Repository;
 using Users_api.Service;
+using Users_api.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,10 @@ builder.Services.AddDbContext<UsersContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("UserApiConnection"));
 });
+
+// Validators
+builder.Services.AddScoped<IValidator<UserInsertDTO>, UserInsertValidator>();
+builder.Services.AddScoped<IValidator<UserUpdateDTO>, UserUpdateValidator>();
 
 // Repository
 builder.Services.AddKeyedScoped<IRepository<User>, UserRepostory>("UserRepository");
